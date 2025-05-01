@@ -1,0 +1,38 @@
+global:
+  log_base: 10
+  seed: 42        
+
+preprocess:
+  input_csv: "data/raw.csv"
+  output_dir: "data/processed"       # where to drop split CSVs
+  val_size:   0.15                   # 15 % validation
+  test_size:  0.15                   # 15 % test
+  strategy: "simple_v1"
+  simple_v1:
+    target: "view_count"
+    target_log: true
+
+train_regressor:
+  model: "xgboost"     # pick any key in table above
+  use_gpu: false                 # true if lightgbm/xgboost/catboost + GPU
+  cv_folds: 1
+  xgboost:
+    n_estimators: 1500
+    max_depth: 12
+    learning_rate: 0.005
+  # Embedding options for text features: 'tfidf', 'sentence_transformers', or 'none'
+  embedding:
+    # Type of embedding to use for 'input_text': 'tfidf', 'sentence_transformers', or 'none'
+    type: "tfidf"
+    tfidf:
+      max_features: 1000
+      ngram_range: [1, 1]
+      stop_words: null
+    sentence_transformers:
+      # e.g., 'all-MiniLM-L6-v2'
+      model_name: "all-MiniLM-L6-v2"
+# Optimization settings for Optuna hyperparameter search
+optimize:
+  n_trials: 20       # number of Optuna trials to run
+  timeout: null      # stop study after given number of seconds (null for no timeout)
+  direction: minimize  # optimization direction: 'minimize' or 'maximize'

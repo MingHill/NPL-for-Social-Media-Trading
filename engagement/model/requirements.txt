@@ -1,0 +1,13 @@
+catboost
+joblib
+lightgbm
+numpy
+optuna
+pandas
+pyyaml
+scikit-learn
+scipy
+shap
+xgboost
+transformers>=4.0.0
+sentence-transformers

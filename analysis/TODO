@@ -1,0 +1,16 @@
+E(scam_duration OR ATH|creator_account)
+E(scam_duration OR ATH|number_of_tweets_by_team) 
+E(scam_duration OR ATH|team_twitter_following)
+E(scam_duration OR ATH|sentiment & engagmenet score of launch tweet)
+E(ATH|other_accounts)
+
+STEP 1:
+- Determine coin outcomes
+    Dependencies:
+        STEP 1.1:
+            - Determine ATH (Wait for above to be done)
+        
+STEP 2: 
+- Get socials entries for all coins
+    Dependencies:
+    - Figure out which accounts and coins belong together.

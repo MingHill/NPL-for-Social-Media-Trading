@@ -1,0 +1,47 @@
+=======================================================================================================================================
+Goal: What are you trying to do (no jargon)? Give an example of inputs/outputs or user interaction. How might it be helpful to people?
+=======================================================================================================================================
+We set out to investigate the relationship between social media activity and asset price behavior. Specifically, in the context of meme coins, and marketing activity on twitter.
+
+The 'meme coin' market capitalization is estimated to be around $60 billion dollars by CoinGecko (April 2025), and at present forms a legitimate niche for daytraders. It offers fast paced, highly volatile, lucrative trading opportunities, but also carries a high risk of scams. Looking at prices alone is not sufficient to provide an edge in this environment. Additionally, these assets are heavily marketed on social media, and do have any real value other than the social aspect. Therefore, it is essential to harness information obtained through social media when making trading decisions in this context.
+
+Our main goals include:
+- Developing NLP tools that improve the trading experience
+- Analyzing subsequent observed behaviors to better understand meme coin dynamics
+
+=======================================================================================================================================
+2. Method: How are you trying to do it (briefly)?
+=======================================================================================================================================
+Modeling:
+    - Sentiment Model:
+        - Sentiment analysis is crucial for analyzing tweets
+        - Baseline: cardiffnlp/twitter-roberta-base-sentiment-latest
+        - Goal improve on financial/crypto related tweets
+    - Engagement Model:
+        - Predicting the engagement level that a tweet will garner (number of views/retweets/etc...)
+        - Baseline: we found no models that do this.
+        - Goal create a new metric and use it in our analysis
+    Extra:
+    - Vulnerability detection model:
+        - For certain blockchains, contract code is visible
+        - Scams tend to be reused
+        - Identify most common codes, and look for vulnerabilities
+
+Analysis:
+    1. Listen to newly created meme coins on the blockchain
+    2. Record coin metadata
+    3. Record tweets made in relation to the coin
+    4. Record outcomes:
+        - Rugpulled: Owner removes liquidity (theft)
+        - Dead: Coin price plummets
+        - Alive: Coin is tradeable
+    5. Analyze data
+
+=======================================================================================================================================
+3. Experiments: How well does it work (so far)?
+=======================================================================================================================================
+
+
+=======================================================================================================================================
+4. Conclusions: What did you learn from your experiments (so far)?
+=======================================================================================================================================

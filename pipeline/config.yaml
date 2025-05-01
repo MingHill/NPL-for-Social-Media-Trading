@@ -1,0 +1,57 @@
+global:
+  log_base: 10
+  seed: 42        
+
+solana:
+  # Your provider’s HTTP and WebSocket endpoints
+  rpc_http: ""
+  rpc_wss:  ""
+  redis_table: "solana_signatures"
+  programs:
+    raydium:
+      id: "675kPX9MHTjS2zt1qfr1NYHuzeLXfQM9H24wFSUt1Mp8"
+      name: "Raydium AMM v4"
+      tags: ["initialize2"]
+    raydium_cpmm:
+      id: "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C"
+      name: "Raydium CPMM"
+      tags: ["InitializeMint2", "InitializeAccount3", "MintTo"]
+    raydium_clmm:
+      id: "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"
+      name: "Raydium CLMM"
+      tags: ["CreatePool", "InitializeAccount3", "InitializeMint2"]
+    pump_fun:
+      id: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"
+      name: "Pump Fun"
+      tags: ["InitializeMint2", "InitializeAccount3", "MintTo"]
+
+monitor:
+  threshold: 0.05
+  
+preprocess:
+  input_csv: "data/raw.csv"
+  output_dir: "data/processed"       # where to drop split CSVs
+  strategy: "simple_v2"
+  simple_v1:
+    target: "retweet_count"
+    target_log: true
+
+train_regressor:
+  model: "xgboost"     # pick any key in table above
+  use_gpu: true                 # true if lightgbm/xgboost/catboost + GPU
+  cv_folds: 1
+  xgboost:
+    n_estimators: 1500
+    max_depth: 12
+    learning_rate: 0.005
+  # Embedding options for text features: 'tfidf', 'sentence_transformers', or 'none'
+  embedding:
+    # Type of embedding to use for 'input_text': 'tfidf', 'sentence_transformers', or 'none'
+    type: "sentence_transformers"
+    tfidf:
+      max_features: 1000
+      ngram_range: [1, 1]
+      stop_words: null
+    sentence_transformers:
+      # e.g., 'all-MiniLM-L6-v2'
+      model_name: "all-MiniLM-L6-v2"
